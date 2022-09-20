@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>{{ title }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <p><label for='{{ field.id_for_label }}'>{{ field.label }}</label>
+                {{ field }}
+            {% endfor %}
+            <br>
+            <button type="submit" name='create_button'>создать</button>
+        </form>
+    </body>
+</html>

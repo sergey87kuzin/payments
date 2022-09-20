@@ -10,7 +10,7 @@
   <body>
     <h1>{{ item.name }}</h1>
     <p>{{ item.description }}</p>
-    <p>{{ item.price|div:100 }}</p>
+    <p>{{ item.price }}</p>
     <button id="buy-button">Buy</button>
     <script>
       const stripe = Stripe('{{ key }}');

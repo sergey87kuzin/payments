@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src='https://js.stripe.com/v3/'></script>
+    </head>
+    <body>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <p><label for='{{ field.id_for_label }}'>{{ field.label }}</label>
+            {{ field }}
+        {% endfor %}
+        <br>
+        <button type="submit" name='add_item'>Добавить</button>
+    </form>
+    <button id="buy-button">Buy</button>
+    <script>
+      const stripe = Stripe('{{ key }}');
+      var buyButton = document.getElementById("buy-button");
+      buyButton.addEventListener("click", function () {
+        fetch("/buy_order/", {method: "GET"})
+        .then((response) => { return response.json(); })
+        .then((session) => { return stripe.redirectToCheckout({ sessionId: session.sessionId })})
+      });
+    </script>
+    </body>
+</html>
